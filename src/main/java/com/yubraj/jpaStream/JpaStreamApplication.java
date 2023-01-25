@@ -8,6 +8,7 @@ public class JpaStreamApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(JpaStreamApplication.class, args);
+		//test
 	}
 
 }
