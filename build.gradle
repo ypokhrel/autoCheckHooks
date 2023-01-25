@@ -18,13 +18,10 @@ dependencies {
 	runtimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
-    googleJavaFormat 'com.google.googlejavaformat:google-java-format:1.9'
+    implementation 'com.google.googlejavaformat:google-java-format:1.9'
 
 }
 
-configurations {
-    googleJavaFormat
-}
 
 tasks.named('test') {
 	useJUnitPlatform()
