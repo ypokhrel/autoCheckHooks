@@ -25,11 +25,3 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
-
-task googleJavaFormat(type: JavaExec) {
-    main = 'com.google.googlejavaformat.java.Main'
-    classpath += configurations.runtimeClasspath
-    def commitId = git.commit.id
-    args '--replace', modifiedFiles(commitId).asPath
-}
-
