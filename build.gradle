@@ -1,14 +1,3 @@
-buildscript {
-    repositories {
-        maven { url "https://plugins.gradle.org/m2/" }
-    }
-    dependencies {
-        classpath "com.gorylenko.gradle-git-properties:gradle-git-properties:4.0.0"
-    }
-}
-
-apply plugin: "com.gorylenko.gradle-git-properties"
-
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.0.2'
