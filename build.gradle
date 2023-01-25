@@ -1,7 +1,18 @@
+buildscript {
+    repositories {
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+        classpath "com.gorylenko.gradle-git-properties:gradle-git-properties:4.0.0"
+    }
+}
+
+apply plugin: "com.gorylenko.gradle-git-properties"
+
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.0.2'
-	id 'io.spring.dependency-management' version '1.1.0'
+    id 'java'
+    id 'org.springframework.boot' version '3.0.2'
+    id 'io.spring.dependency-management' version '1.1.0'
 }
 
 group = 'com.yubraj'
@@ -9,19 +20,18 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-webflux'
-	runtimeOnly 'com.h2database:h2'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'io.projectreactor:reactor-test'
-    implementation 'com.google.googlejavaformat:google-java-format:1.9'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    runtimeOnly 'com.h2database:h2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.projectreactor:reactor-test'
+    implementation 'com.google.googlejavaformat:google-java-format:1.14.0'
 
 }
-
 
 tasks.named('test') {
 	useJUnitPlatform()
@@ -29,7 +39,8 @@ tasks.named('test') {
 
 task googleJavaFormat(type: JavaExec) {
     main = 'com.google.googlejavaformat.java.Main'
-    classpath = configurations.googleJavaFormat
-    args '--replace', 'src/**/*.java'
+    classpath += configurations.runtimeClasspath
+    def commitId = git.commit.id
+    args '--replace', modifiedFiles(commitId).asPath
 }
 
