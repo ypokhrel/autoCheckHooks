@@ -18,10 +18,17 @@ dependencies {
 	runtimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
-	testImplementation 'com.google.googlejavaformat:google-java-format:1.9'
+    googleJavaFormat 'com.google.googlejavaformat:google-java-format:1.9'
 
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+task googleJavaFormat(type: JavaExec) {
+    main = 'com.google.googlejavaformat.java.Main'
+    classpath = configurations.googleJavaFormat
+    args '--replace', 'src/**/*.java'
+}
+
